@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %> 
+    </head>
+    <body>
+        <main>
+            <nav class="nav">
+                <%- include('./partials/nav-2.ejs') %>
+            </nav>
+            <article class="a-height box box-text">
+                <h2> <%= blog.title %>  </h2>
+                <p> <%= blog.snippet %>  </p>
+                <p> <%= blog.body %>  </p>
+                <div class="view-counter-box">
+                    <img class="view-icon" src="../images/view-icon.png" title="times viewed" alt="times viewed icon">
+                    <span class="view-counter"><%= blog.views %></span>
+                </div>
+                <p class="text"> Created by: <%= blog.author %> </p>
+                
+                <% if(locals.user) { %>
+                   <% if(locals.user === blog.author || locals.isAdmin === true) { %> 
+                    <input id="csToken" type="hidden" name="csrfToken" value="<%= csrf %>">
+                    <button class="delete-btn btn" data-id="<%= blog.id %>">Delete</button>
+                    <% } %> 
+                <% } %> 
+
+            </article>
+            <section class="comment-box">
+                <form id="comment-form" class="add-comment" data-id="<%= blog.id %>">
+                    <p class="error-text"></p>
+                    <textarea name="comment" id="comment" class="comment-field text-field" placeholder="Write a comment"></textarea>
+                    <input id="csToken" type="hidden" name="csrfToken" value="<%= csrf %>">
+                    <button type="submit" class="comment-btn btn">submit</button>
+                </form>
+                <h2 class="text">comments</h2>
+
+                <% if(comments.length > 0) { %> 
+                    <% for(let i = 0; comments.length > i; i++) { %>   
+                    <div class="box box-text comment">
+                        <p class="comment-user"> <%= comments[i].user %> </p>
+                        <em class="comment-date"> <%= comments[i].date %> </em>
+                        <p class="comment-body"> <%= comments[i].body %> </p>
+                    </div>  
+                <% }} else { %> 
+                    <p class="text">No comments</p>
+                <% } %>     
+            </section>
+        </main>
+        <script src="../js/comment.js"></script>
+        <% if(locals.user) { %> 
+        <% if(locals.user === blog.author || locals.isAdmin === true) { %>
+        <script src="../js/delete-request.js"></script>
+        <% }} %>
+    </body>
+</html>

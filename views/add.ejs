@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %> 
+    </head>
+    <body>
+        <main>
+            <nav class="nav">
+                <a href="/">
+                    <img class="arrow-icon" src="../images/arrow-icon.png">  
+                </a>
+            </nav>
+            <form id="blog-form">
+                <div>
+                    <p class="error-text"></p>
+                </div>
+                <div>
+                    <label for="title">Title</label>
+                    <input id="title" class="text-field" name="title" type="text">
+                </div>
+                <div>
+                    <label for="snippet">Snippet</label>
+                    <input id="snippet" class="text-field" name="snippet" type="text">
+                </div>
+                <div>
+                    <label for="body">Body text</label>
+                    <textarea name="body" class="text-field" id="body" cols="30" rows="10"></textarea>
+                </div>
+                <input id="csToken" type="hidden" name="csrfToken" value="<%= csrf %>">
+                <button class="btn" type="submit">Create</button>
+            </form>
+        </main>
+        <script src="../js/post.js"></script>
+    </body>
+</html>

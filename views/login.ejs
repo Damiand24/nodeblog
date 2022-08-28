@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %> 
+    </head>
+    <body>
+        <main>
+            <nav class="nav">
+                <%- include('./partials/nav-2.ejs') %>
+            </nav>
+            <form id="login-form">
+                <div>
+                    <p class="error-text"></p>
+                </div>
+                <div>
+                    <label for="username">username</label>
+                    <input id="username" class="text-field" name="username" type="text">
+                </div>
+                <div>
+                    <label for="pass">password</label>
+                    <input id="pass" class="text-field" name="password" type="password">
+                </div>
+                <p class="text">Do not have an account? <a href="/register" class="text underline">register</a></p>
+                <input id="csToken" type="hidden" name="csrfToken" value="<%= csrf %>">
+                <button id="form-submit" class="btn" type="submit">Login</button>
+            </form>
+        </main>
+        <script src="../js/login.js"></script>
+    </body>
+</html>

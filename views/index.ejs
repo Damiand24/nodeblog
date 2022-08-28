@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %> 
+    </head>
+    <body>
+        <body>
+            <main>
+                <% if(locals.user)  { %>
+                    <p class="text">Logged in as: <%= locals.user %> </p>
+                <% } %>  
+                <nav class="nav">
+                   <%- include('./partials/nav.ejs') %> 
+                </nav>
+                <% if(blog.length > 0) { %>
+                    <% for(let i = 0; i < blog.length; i++) { %>  
+                <a href="/blog/<%= blog[i].id %>">
+                    <article class="post box box-text">
+                        <h2> <%= blog[i].title %> </h2>
+                        <p> <%= blog[i].snippet %> </p>
+                        <p> Created by: <%= blog[i].author %> </p>
+                        <div class="view-counter-box">
+                            <img class="view-icon" src="../images/view-icon.png" title="times viewed" alt="times viewed icon">
+                            <span class="view-counter"><%= blog[i].views %></span>
+                        </div>
+                    </article>
+                </a>
+                <% }} else { %>
+                    <p class="noBlogText">No posts found</p>
+                <% } %> 
+            </main>
+        </body>
+        <script src="../js/logout.js"></script>
+    </body>
+</html>

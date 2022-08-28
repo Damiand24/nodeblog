@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %> 
+        <link rel="stylesheet" href="../css/main.css">
+    </head>
+    <body>
+        <main class="main-extended">
+            <nav>
+                <div>
+                    <a class="text link" href="/">Home</a>
+                    <a id="logoutBtn" class="text link" data-token="<%= csrf %> ">Logout</a>
+                </div>
+            </nav>
+            <div class="text">
+                <div class="users-div radius">
+                    <span>username</span>
+                    <span>date of creation</span>
+                    <span>suspended</span>
+                </div>
+                <% for(let i = 0; user.length > i; i++) { %> 
+                    <% if(user[i].admin === true) { i++ } else { %> 
+                    <div class="users-div">
+                        <span><%= user[i].username %></span>
+                        <span><%= user[i].createdAt.toString().slice(0, 16) %></span>
+                        <span class="sus"><%= user[i].isSuspended %></span>
+                        <button class="banUser" data-user="<%= user[i].username %>">Suspend</button>
+                    </div> 
+            <% }} %> 
+            <input id="csToken" type="hidden" value="<%= csrf %>">
+            </div>
+        </main>
+        <script src="../js/suspendUser.js"></script>
+        <script src="../js/logout.js"></script>
+    </body>
+</html>

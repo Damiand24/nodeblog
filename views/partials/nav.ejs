@@ -1,0 +1,16 @@
+<% if(locals.user) { %> 
+    <div>
+        <a id="logoutBtn" class="text link" data-token="<%= csrf %> ">Logout</a>
+        <% if(locals.isAdmin) { %>
+        <a class="text link" href="/admin/users">Users</a>
+        <% } %>
+    </div>
+<% } else { %> 
+    <div>
+        <a class="text link" href="/login">Login</a>
+        <a class="text link" href="/register">Register</a>
+    </div>
+<% } %> 
+<a href="/blog/add" aria-label="add new">
+    <img class="add-icon" src="../images/add-icon.png" title="Add new">
+</a>
